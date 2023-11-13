@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+      - ./mosquitto/config/certs:/mosquitto/config/certs
