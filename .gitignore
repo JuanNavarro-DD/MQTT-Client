@@ -163,3 +163,4 @@ cython_debug/
 mosquitto/log/
 mosquitto/data/
 *credentials
+*Password*
