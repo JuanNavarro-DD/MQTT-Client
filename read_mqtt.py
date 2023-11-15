@@ -76,6 +76,7 @@ def mqtt_client(host:str, port:int, username:str, password:str):
     mqttClient.on_connect = on_connect
     mqttClient.on_message = on_message
     mqttClient.connect(host, port=port)
+    return mqttClient
 
 def subscribe_to_topics(mqttClient, topics:list):
     for topic in topics:
@@ -91,5 +92,5 @@ if __name__ == '__main__':
     mqttClient = mqtt_client('192.168.68.114', 1883, mqttUserName, brokerPassword)
 
     subscribe_to_topics(mqttClient, loggerInfo['logger_topic'].values)
-    
+
     mqttClient.loop_forever()
