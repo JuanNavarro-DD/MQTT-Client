@@ -4,7 +4,7 @@ from asyncua import Client
 logger = logging.getLogger('asyncua')
 logging.disable(logging.WARNING)
 
-data_variables = ["temperature","pressure","pumpsetting"]
+data_variables = ["waterLevel","pressure","pumpSetting"]
 
 
 async def dict_format(keys, values):
@@ -12,13 +12,13 @@ async def dict_format(keys, values):
 
 async def main():
     while True:
-        url = "opc.tcp://<OPC-SERVER-IP-ADDRESS>:4840/opcua/"
+        url = "opc.tcp://192.168.68.132:4840/opcua/"
         async with Client(url=url) as client:
             data_list = []
-            namespace = "mynamespace"
+            namespace = "floodDetectionOPC"
             idx = await client.get_namespace_index(namespace)
             for i in range(len(data_variables)):
-                myvar = await client.nodes.root.get_child(["0:Objects", "{}:vPLC".format(idx), "{}:{}".format(idx,data_variables[i])])
+                myvar = await client.nodes.root.get_child(["0:Objects", "{}:FloodDetection".format(idx), "{}:{}".format(idx,data_variables[i])])
                 val = await myvar.get_value()
                 data_list.append(val)
             # _list = data_list
